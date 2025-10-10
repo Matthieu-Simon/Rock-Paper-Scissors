@@ -12,10 +12,10 @@ function getComputerChoice() {
   return computerResult;
 };
 
-function getHumanChoice() {
-  let choice = prompt("Veuillez choisir entre Rock, Paper or Scissors");
-  return choice;
-};
+// function getHumanChoice() {
+//   let choice = prompt("Veuillez choisir entre Rock, Paper or Scissors");
+//   return choice;
+// };
 
 // function playGame () {
 //   let total = 0;
@@ -54,6 +54,36 @@ function getHumanChoice() {
 // }
 
 // playGame();
+let computerScore = 0;
+let humanScore = 0;
+
+function playRound(humanChoice, computerChoice) {
+  const humanChoiceConverted = humanChoice.toLowerCase();
+  const computerChoiceConverted = computerChoice.toLowerCase();
+
+  if (humanChoiceConverted === "rock" && computerChoiceConverted === "scissors"
+      || humanChoiceConverted === "paper" && computerChoiceConverted === "rock"
+      || humanChoiceConverted === "scissors" && computerChoiceConverted === "paper") {       
+        message.textContent = `You win ! ${humanChoiceConverted} beats ${computerChoiceConverted}`;
+        humanScore += 1;     
+      } else if (humanChoiceConverted === "rock" && computerChoiceConverted === "paper"
+      || humanChoiceConverted === "paper" && computerChoiceConverted === "scissors"
+      || humanChoiceConverted === "scissors" && computerChoiceConverted === "rock") {
+        message.textContent = `You lose... ${computerChoiceConverted} beats ${humanChoiceConverted}.`;
+        computerScore += 1;
+      } else {
+        message.textContent = `It's a tie. You choose ${humanChoiceConverted} and Computer also!`;
+      }
+    result.textContent = `Player: ${humanScore} - Computer's score: ${computerScore}`;
+
+    if (humanScore === 5) {
+      annonce.textContent = "Vous avez remporté la partie !!!";
+    } else if (computerScore === 5) {
+      annonce.style.color = "green";
+      annonce.textContent = "Vous avez perdu... L'ordinateur remporte la partie !";
+    }
+};
+
 
 const body = document.querySelector("body");
 
@@ -72,3 +102,30 @@ btnScissors.textContent = "Scissors";
 body.appendChild(btnRock);
 body.appendChild(btnPaper);
 body.appendChild(btnScissors);
+
+const message = document.createElement("p");
+message.classList.add("message");
+message.textContent = "";
+body.appendChild(message);
+
+const result = document.createElement("div");
+result.classList.add("result");
+body.appendChild(result);
+
+const annonce = document.createElement("h1");
+annonce.classList.add("annonce");
+annonce.textContent = "";
+body.appendChild(annonce);
+
+
+btnRock.addEventListener("click", () => {
+  playRound("Rock", getComputerChoice());
+});
+
+btnPaper.addEventListener("click", () => {
+  playRound("Paper", getComputerChoice());
+});
+
+btnScissors.addEventListener("click", () => {
+  playRound("Scissors", getComputerChoice());
+});
