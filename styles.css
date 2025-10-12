@@ -1,10 +1,26 @@
+.btn, .reset {
+  border-radius: 8px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
 .btn {
   background-color: #fff;
   color: #12D345;
   border: #12D345 1px solid;
-  border-radius: 8px;
-  padding: 5px 15px;
-  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #666;
+}
+
+.reset {
+  background-color: #fff;
+  color: red;
+  border: red 1px solid;
 }
 
 .annonce {
